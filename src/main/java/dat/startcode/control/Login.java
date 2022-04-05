@@ -2,9 +2,11 @@ package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.entities.Customer;
+import dat.startcode.model.entities.Topping;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.CustomerMapper;
 import dat.startcode.model.persistence.ConnectionPool;
+import dat.startcode.model.persistence.ToppingMapper;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,6 +44,8 @@ public class Login extends HttpServlet
         session.setAttribute("customer", null); // adding empty user object to session scope
         CustomerMapper userMapper = new CustomerMapper(connectionPool);
         Customer customer = null;
+
+
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
