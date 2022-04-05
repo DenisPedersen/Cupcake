@@ -274,7 +274,7 @@ CREATE
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `cupcake`.`customer.view` AS
+VIEW `cupcake`.`customer_view` AS
     SELECT 
         `c`.`userrole_id` AS `userrole_id`,
         `a`.`zipcode` AS `zipcode`,
