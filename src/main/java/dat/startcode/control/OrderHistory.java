@@ -1,17 +1,31 @@
 package dat.startcode.control;
 
+import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.entities.Customer;
+import dat.startcode.model.entities.Order;
+import dat.startcode.model.persistence.ConnectionPool;
 import dat.startcode.model.persistence.OrderMapper;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @WebServlet(name = "Order", value = "/Order")
 public class OrderHistory extends HttpServlet {
+
+
+    private ConnectionPool connectionPool;
+
+    @Override
+    public void init() throws ServletException
+    {
+        this.connectionPool = ApplicationStart.getConnectionPool();
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -25,7 +39,11 @@ public class OrderHistory extends HttpServlet {
         request.getRequestDispatcher("error.jsp").forward(request, response);
                 }
 
-        OrderMapper ordermapper = new OrderMapper();
+        OrderMapper ordermapper = new OrderMapper(connectionPool);
+        ArrayList<Order> orderArrayList = ordermapper.getAllOrders();
+
+        request.setAttribute("orderArrayList", orderArrayList);
+
 
     }
 

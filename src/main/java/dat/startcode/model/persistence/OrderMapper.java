@@ -1,15 +1,14 @@
 package dat.startcode.model.persistence;
 
+import dat.startcode.model.entities.Bottom;
 import dat.startcode.model.entities.Customer;
 import dat.startcode.model.entities.Order;
 import dat.startcode.model.entities.Orderline;
 import dat.startcode.model.exceptions.DatabaseException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class OrderMapper implements IOrderMapper{
 
@@ -34,29 +33,52 @@ public class OrderMapper implements IOrderMapper{
                 ResultSet rs = ps.executeQuery();
                 while (rs.next())
                 {
-                    int orderline_id = rs.getString("role_name");
-                    orderline = new Customer(email, password, role);
-                } else
-                {
-                    throw new DatabaseException("Wrong username or password");
+                    int orderline_id = rs.getInt("orderline_id");
+                    int orderID = rs.getInt("order_id");
+                    int amount = rs.getInt("amount");
+                    String t_name = rs.getString("t_name");
+                    String b_name = rs.getString("b_name");
+                    int t_price = rs.getInt("t_price");
+                    int b_price = rs.getInt("b_price");
+                    int total = rs.getInt("total");
+
+                    orderline = new Orderline(orderline_id,orderID,amount,t_name,b_name,t_price,b_price,total);
+
+                    orderlineArrayList.add(orderline);
                 }
             }
         } catch (SQLException ex)
         {
             //throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
             System.out.println(ex);
-        }
+        } return orderlineArrayList;
     }
 
     @Override
     public ArrayList<Order> getAllOrders() {
-        String sql = "SELECT * FROM order";
+        String sql = "SELECT * FROM `order`";
 
         ArrayList<Order> orderArrayList = new ArrayList<>();
 
-        try (ConnectionPool connectionPool) {
+        try (Connection  connection= connectionPool.getConnection() ) {
 
+            try (PreparedStatement ps = connection.prepareStatement(sql))
+            {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next())
+                {
+                    int orderID = rs.getInt("order_id");
+                    Timestamp timestamp = rs.getTimestamp("date");
+                    ArrayList<Orderline> orderlineArrayList = getAllOrderlines(orderID);
+                    Order newOrder = new Order(orderID, timestamp, orderlineArrayList);
+                    orderArrayList.add(newOrder);
+
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
+        return orderArrayList;
     }
 }
