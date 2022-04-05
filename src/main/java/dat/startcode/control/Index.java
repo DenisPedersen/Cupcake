@@ -33,22 +33,34 @@ public class Index extends HttpServlet
         bottomMapper = new BottomMapper(connectionPool);
         toppingMapper = new ToppingMapper(connectionPool);
 
-        ArrayList<Bottom> bottomArrayList = null;
-        ArrayList<Topping> toppingArrayList = null;
+
+
+
         try {
+
+
+            ArrayList<Bottom> bottomArrayList = new ArrayList<>();
+            ArrayList<Topping> toppingArrayList = new ArrayList<>();
+
             log("bottomArrayList size er: "+bottomArrayList.size()+ " Før database pull");
             log("toppingArrayList size er: "+toppingArrayList.size()+ " Før database pull");
 
             bottomArrayList = bottomMapper.getAllBottoms();
             toppingArrayList = toppingMapper.getAllToppings();
 
+            getServletContext().setAttribute("bottomArrayList", bottomArrayList);
+            getServletContext().setAttribute("toppingArrayList", toppingArrayList);
+
             log("bottomArrayList size er: "+bottomArrayList.size()+ " Efter database pull");
             log("toppingArrayList size er: "+toppingArrayList.size()+ " Efter database pull");
+
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
-        getServletContext().setAttribute("bottomList", bottomArrayList);
-        getServletContext().setAttribute("toppingList", toppingArrayList);
+
+
+
+
 
     }
 
