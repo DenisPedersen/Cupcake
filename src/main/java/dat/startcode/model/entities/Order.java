@@ -15,4 +15,16 @@ public class Order {
         this.timestamp = timestamp;
         this.orderlineArrayList = orderlineArrayList;
     }
+
+    public int getOrder_id() {
+        return order_id;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public ArrayList<Orderline> getOrderlineArrayList() {
+        return orderlineArrayList;
+    }
 }

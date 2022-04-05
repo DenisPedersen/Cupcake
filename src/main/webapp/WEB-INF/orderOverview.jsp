@@ -18,7 +18,7 @@
 
         <c:forEach items="${requestScope.orderArrayList}" var="item" >
             Her er ordreid: ${item.order_id}
-            Her er den totale pris: ${item.total}
+            Her er den totale pris: ${item.timestamp}
         </c:forEach>
 
 

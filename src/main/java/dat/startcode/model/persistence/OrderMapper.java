@@ -18,7 +18,7 @@ public class OrderMapper implements IOrderMapper{
         this.connectionPool = connectionPool;
     }
 
-    public ArrayList<Orderline> getAllOrderlines(int order_id) {
+    public ArrayList<Orderline> getAllOrderlines(int orderID) {
         ArrayList<Orderline> orderlineArrayList = new ArrayList<>();
 
         Orderline orderline = null;
@@ -28,13 +28,13 @@ public class OrderMapper implements IOrderMapper{
         {
             try (PreparedStatement ps = connection.prepareStatement(sql))
             {
-                ps.setInt(1, order_id);
+                ps.setInt(1, orderID);
 
                 ResultSet rs = ps.executeQuery();
                 while (rs.next())
                 {
                     int orderline_id = rs.getInt("orderline_id");
-                    int orderID = rs.getInt("order_id");
+                    int order_id = rs.getInt("order_id");
                     int amount = rs.getInt("amount");
                     String t_name = rs.getString("t_name");
                     String b_name = rs.getString("b_name");
@@ -42,7 +42,7 @@ public class OrderMapper implements IOrderMapper{
                     int b_price = rs.getInt("b_price");
                     int total = rs.getInt("total");
 
-                    orderline = new Orderline(orderline_id,orderID,amount,t_name,b_name,t_price,b_price,total);
+                    orderline = new Orderline(orderline_id,order_id,amount,t_name,b_name,t_price,b_price,total);
 
                     orderlineArrayList.add(orderline);
                 }

@@ -3,6 +3,7 @@ package dat.startcode.control;
 import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.entities.Customer;
 import dat.startcode.model.entities.Order;
+import dat.startcode.model.entities.Orderline;
 import dat.startcode.model.persistence.ConnectionPool;
 import dat.startcode.model.persistence.OrderMapper;
 
@@ -40,9 +41,14 @@ public class OrderHistory extends HttpServlet {
                 }
 
         OrderMapper ordermapper = new OrderMapper(connectionPool);
+        ArrayList<Orderline> orderlineArrayList = ordermapper.getAllOrderlines(1);
+
+        System.out.println(orderlineArrayList);
+
         ArrayList<Order> orderArrayList = ordermapper.getAllOrders();
 
         request.setAttribute("orderArrayList", orderArrayList);
+        request.getRequestDispatcher("WEB-INF/orderOverview.jsp").forward(request,response);
 
 
     }
