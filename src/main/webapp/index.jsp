@@ -5,25 +5,28 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Welcome to the frontpage
+        Velkommen hos Olsker Cupcakes!
     </jsp:attribute>
 
     <jsp:attribute name="footer">
-        Welcome to the frontpage
-    </jsp:attribute>
+
+     </jsp:attribute>
 
     <jsp:body>
 
-        <p>Startcode for 2nd semester </p>
 
-        <c:if test="${sessionScope.customer != null}">
-            <p>You are logged in with the role of "${sessionScope.customer.role}".</p>
-        </c:if>
 
-        <c:if test="${sessionScope.customer == null}">
-            <p>You are not logged in yet. You can do it here: <a
-                    href="login.jsp">Login</a></p>
-        </c:if>
+        <c:forEach items="${applicationScope.eventArrayList}" var="item" >
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">${item.startTime}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">${item.duration} time(r)</h6>
+                <p class="card-text">${item.address}</p>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                    Book</button>
+            </div>
+        </div>
 
     </jsp:body>
 
