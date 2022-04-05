@@ -16,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerMapperTest
 {
-    private final static String USER = "root";
-    private final static String PASSWORD = "root";
+    private final static String USER = "cupcake";
+    private final static String PASSWORD = "cupcake";
     private final static String URL = "jdbc:mysql://localhost:3306/startcode_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
 
     private static ConnectionPool connectionPool;
