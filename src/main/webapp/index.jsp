@@ -21,12 +21,13 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">${item.name}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">${item.price} Pris</h6>
+                <h6 class="card-subtitle mb-2 text-muted">${item.price} kr</h6>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                    Køb nu!</button>
+                    Vælg!</button>
             </div>
         </div>
 
+        </c:forEach>
 
 
             <!-- Modal -->
@@ -41,23 +42,13 @@
                         </div>
                         <div class="modal-body">
 
-                            <form action="ServletConfirmation" method="post">
-                                <br>
-                                Købe ${item.name}?
-                                <br>
-                                <label for="name">Navn</label><br>
-                                <input type="text" id="name" name="name" placeholder="Navn"><br>
-                                <label for="tlf">Telefonnummer:</label><br>
-                                <input type="text" id="tlf" name="tlf" placeholder="Telefonnummer">
-                                <br>
-                                <label for="email">Email</label><br>
-                                <input type="text" id="email" name="email" placeholder="Email">
-                                <br>
+                            <c:forEach items="${applicationScope.toppingArrayList}" var="item" >
 
-                                <br>
+                            <div class="button">
+                                <button type="submit" class="btn btn-primary" id="payment">${item.name}</button>
 
-                                <input type="hidden" name="saunaevent" value="${item.name}"/>
-                                <button type="submit" class="btn btn-primary" id="payment">Klik her for at gå til betaling</button>
+                            </div>
+                            </c:forEach>
 
                             </form>
 
@@ -73,7 +64,7 @@
 
 
 
-        </c:forEach>
+
 
     </jsp:body>
 
