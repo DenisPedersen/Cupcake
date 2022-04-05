@@ -1,9 +1,11 @@
 package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
+import dat.startcode.model.entities.Bottom;
 import dat.startcode.model.entities.Customer;
 import dat.startcode.model.entities.Topping;
 import dat.startcode.model.exceptions.DatabaseException;
+import dat.startcode.model.persistence.BottomMapper;
 import dat.startcode.model.persistence.CustomerMapper;
 import dat.startcode.model.persistence.ConnectionPool;
 import dat.startcode.model.persistence.ToppingMapper;
