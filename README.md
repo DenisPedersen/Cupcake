@@ -9,7 +9,7 @@ Datamatikeruddannelsen i Lyngby og på Bornholm forår 2022.
 
 1. Først skal du clone projektet eller downloade en zip-fil med projektet til din arbejdsstation.
 2. Beslut dig for hvad projektets database skal hedde. Det skal du bruge i næste punkt.
-3. Åbn Workbench og kør en tilpasset (med dit databasenavn i stedet for `startcode`) version af sql-filen `startcode.sql`, som ligger i mappen `resources`. Den opretter en database med en user-tabel og en test-database.
+3. Åbn Workbench og kør en tilpasset (med dit databasenavn i stedet for `startcode`) version af sql-filen `startcode.sql`, som ligger i mappen `resources`. Den opretter en database med en customer-tabel og en test-database.
 4. Du skal evt. ændre kodeord til databasen i projektet. Det gøres i filerne: `/persistence/ConnectionPool` i linie 14 og 15. Du skal også ændre i UserMapperTest.
 5. Til sidst skal du lave en Tomcat konfiguration. Dvs, 
    1. klik på "Add Configuration ..."
@@ -26,17 +26,17 @@ Startkoden indeholder følgende:
 - Javaservlets
 - JSP sider. Læg dem i WEB-INF som kun skal tilgås via en servlet.
 - En super skrabet css-fil til styling
-- Datamapper for user-tabellen, som anvender en connection pool.
+- Datamapper for customer-tabellen, som anvender en connection pool.
 - Fejlhåndtering med exceptions for databaseoperationer.
 - Integrationstest af datamapperen for User.
 
 Funktionelt kan applikationen:
 
 - Vise en forside med links til undersider, som endnu ikke er lavet
-- Logge en user på. Der findes to brugere i databasen.
-    1. `user` med password: `1234` (rolle: `user`)
+- Logge en customer på. Der findes to brugere i databasen.
+    1. `customer` med password: `1234` (rolle: `customer`)
     2. `admin` med password: `1234` (rolle: `admin`)
-- Man kan se på index.jsp hvordan man kan udnytte om en user er logget på eller ej.
+- Man kan se på index.jsp hvordan man kan udnytte om en customer er logget på eller ej.
 - Hvis man indtaster ugyldige data under indlogning, bliver man sendt til en en fejlside.
 - Logge en bruger af
 - Begyndelsen på en metode til at tjekke om en given bruger har adgang ligger i `services`

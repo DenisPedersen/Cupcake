@@ -1,9 +1,9 @@
 package dat.startcode.persistence;
 
-import dat.startcode.model.entities.User;
+import dat.startcode.model.entities.Customer;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.ConnectionPool;
-import dat.startcode.model.persistence.UserMapper;
+import dat.startcode.model.persistence.CustomerMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,19 +14,19 @@ import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserMapperTest
+class CustomerMapperTest
 {
     private final static String USER = "root";
     private final static String PASSWORD = "root";
     private final static String URL = "jdbc:mysql://localhost:3306/startcode_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
 
     private static ConnectionPool connectionPool;
-    private static UserMapper userMapper;
+    private static CustomerMapper userMapper;
 
     @BeforeAll
     public static void setUpClass() {
             connectionPool = new ConnectionPool(USER, PASSWORD, URL);
-            userMapper = new UserMapper(connectionPool);
+            userMapper = new CustomerMapper(connectionPool);
     }
 
     @BeforeEach
@@ -60,9 +60,9 @@ class UserMapperTest
     @Test
     void login() throws DatabaseException
     {
-        User expectedUser = new User("user","1234","user");
-        User actualUser = userMapper.login("user","1234");
-        assertEquals(expectedUser, actualUser);
+        Customer expectedCustomer = new Customer("user","1234","user");
+        Customer actualCustomer = userMapper.login("user","1234");
+        assertEquals(expectedCustomer, actualCustomer);
     }
 
     @Test
@@ -80,11 +80,11 @@ class UserMapperTest
     @Test
     void createUser() throws DatabaseException
     {
-        User newUser = userMapper.createUser("jill", "1234", "user");
-        User logInUser = userMapper.login("jill","1234");
-        User expectedUser = new User("jill", "1234", "user");
-        assertEquals(expectedUser, newUser);
-        assertEquals(expectedUser, logInUser);
+        Customer newCustomer = userMapper.createUser("jill", "1234", "user");
+        Customer logInCustomer = userMapper.login("jill","1234");
+        Customer expectedCustomer = new Customer("jill", "1234", "user");
+        assertEquals(expectedCustomer, newCustomer);
+        assertEquals(expectedCustomer, logInCustomer);
 
     }
 }

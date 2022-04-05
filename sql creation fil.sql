@@ -274,8 +274,9 @@ CREATE
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `cupcake`.`customers_view` AS
+VIEW `cupcake`.`customer.view` AS
     SELECT 
+        `c`.`userrole_id` AS `userrole_id`,
         `a`.`zipcode` AS `zipcode`,
         `c`.`address_id` AS `address_id`,
         `c`.`customer_id` AS `customer_id`,
@@ -283,14 +284,15 @@ VIEW `cupcake`.`customers_view` AS
         `c`.`email` AS `email`,
         `c`.`password` AS `password`,
         `c`.`balance` AS `balance`,
-        `c`.`userrole_id` AS `userrole_id`,
         `a`.`street` AS `street`,
         `a`.`street_number` AS `street_number`,
-        `z`.`city` AS `city`
+        `z`.`city` AS `city`,
+        `u`.`role_name` AS `role_name`
     FROM
-        ((`cupcake`.`customer` `c`
+        (((`cupcake`.`customer` `c`
         JOIN `cupcake`.`address` `a` ON ((`c`.`address_id` = `a`.`address_id`)))
         JOIN `cupcake`.`zip` `z` ON ((`a`.`zipcode` = `z`.`zipcode`)))
+        JOIN `cupcake`.`userrole` `u` ON ((`c`.`userrole_id` = `u`.`userrole_id`)))
 ;
 
 CREATE 

@@ -1,9 +1,9 @@
 package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
-import dat.startcode.model.entities.User;
+import dat.startcode.model.entities.Customer;
 import dat.startcode.model.exceptions.DatabaseException;
-import dat.startcode.model.persistence.UserMapper;
+import dat.startcode.model.persistence.CustomerMapper;
 import dat.startcode.model.persistence.ConnectionPool;
 
 import javax.servlet.ServletException;
@@ -38,17 +38,17 @@ public class Login extends HttpServlet
     {
         response.setContentType("text/html");
         HttpSession session = request.getSession();
-        session.setAttribute("user", null); // adding empty user object to session scope
-        UserMapper userMapper = new UserMapper(connectionPool);
-        User user = null;
-        String username = request.getParameter("username");
+        session.setAttribute("customer", null); // adding empty user object to session scope
+        CustomerMapper userMapper = new CustomerMapper(connectionPool);
+        Customer customer = null;
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
 
         try
         {
-            user = userMapper.login(username, password);
+            customer = userMapper.login(email, password);
             session = request.getSession();
-            session.setAttribute("user", user); // adding user object to session scope
+            session.setAttribute("customer", customer); // adding user object to session scope
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
         catch (DatabaseException e)
