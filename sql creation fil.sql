@@ -318,3 +318,23 @@ VIEW `order_view_with_total` AS
         JOIN `topping` `t` ON ((`ol`.`topping_id` = `t`.`topping_id`)))
         JOIN `bottom` `b` ON ((`ol`.`bottom_id` = `b`.`bottom_id`)))
 ;
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `cupcake`@`%` 
+    SQL SECURITY DEFINER
+VIEW `orderline_view_with_total` AS
+    SELECT 
+        `orderline`.`orderline_id` AS `orderline_id`,
+        `orderline`.`order_id` AS `order_id`,
+        `orderline`.`amount` AS `amount`,
+        `t`.`name` AS `t_name`,
+        `b`.`name` AS `b_name`,
+        `t`.`price` AS `t_price`,
+        `b`.`price` AS `b_price`,
+        ((`orderline`.`amount` * `b`.`price`) + (`orderline`.`amount` * `t`.`price`)) AS `total`
+    FROM
+        ((`orderline`
+        JOIN `topping` `t` ON ((`orderline`.`topping_id` = `t`.`topping_id`)))
+        JOIN `bottom` `b` ON ((`orderline`.`bottom_id` = `b`.`bottom_id`)))
+        ;
