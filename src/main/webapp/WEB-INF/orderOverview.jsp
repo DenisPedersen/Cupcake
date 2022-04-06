@@ -18,7 +18,7 @@
 
         <c:forEach items="${requestScope.orderArrayList}" var="item">
             <table>
-                <thead>
+                <thead class="orderHeader">
                 <tr>
                 <th colspan="3">Ordrenummer: ${item.order_id}</th>
                     <th colspan="3">Kundenavn: ${item.customerName}</th>
