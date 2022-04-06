@@ -22,7 +22,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="index.jsp">
+            <a class="navbar-brand" href="index.jsp" >
                 <img src="${pageContext.request.contextPath}/images/olsker.jpg" width="1495" class="img-fluid"/>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -42,6 +42,7 @@
                     </c:if>
                 </div>
             </div>
+       <%--     <img src="${pageContext.request.contextPath}/images/olsker2.jpg"/>  --%>
         </div>
     </nav>
 </header>
