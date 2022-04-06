@@ -1,24 +1,21 @@
 package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
+
 import dat.startcode.model.entities.CupcakeOrder;
-import dat.startcode.model.entities.Order;
-import dat.startcode.model.entities.Orderline;
-import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.ConnectionPool;
-
-
+import dat.startcode.model.persistence.OrderMapper;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-
 
 @WebServlet(name = "AddToCart", value = "/AddToCart")
 public class AddToCart extends HttpServlet {
 
     private ConnectionPool connectionPool;
 
+    private OrderMapper orderMapper;
 
     @Override
     public void init() throws ServletException
@@ -38,7 +35,6 @@ public class AddToCart extends HttpServlet {
 
 
 
-
         int bottom_id = Integer.parseInt(request.getParameter("bottom_id"));
         int topping_id = Integer.parseInt(request.getParameter("topping_id"));
         int amount = Integer.parseInt(request.getParameter("amount"));
@@ -47,11 +43,8 @@ public class AddToCart extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-
         request.setAttribute("cupcakeOrder", cupcakeOrder);
         request.getRequestDispatcher("WEB-INF/cart.jsp").forward(request,response);
-
-
 
 
     }
