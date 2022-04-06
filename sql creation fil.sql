@@ -133,7 +133,7 @@ VALUES
 ("Morten Mangepenge", "m@m.dk", 1234, 2, 400),
 ("Denis Dynamit", "d@d.dk", 1234, 3, 5000),
 ("Long Langefinger", "l@l.dk", 1234, 4, 80),
-("Sebastion Sauna", "s@S.dk", 1234, 5, 165);
+("Sebastian Sauna", "s@S.dk", 1234, 5, 165);
 
 
 
@@ -301,8 +301,9 @@ CREATE
     SQL SECURITY DEFINER
 VIEW `order_view_with_total` AS
     SELECT 
+		`o`.`order_id` AS `order_id`,
         `o`.`customer_id` AS `customer_id`,
-        `o`.`order_id` AS `order_id`,
+        `c`.`name` AS `customer_name`,
         `o`.`date` AS `date`,
         `ol`.`orderline_id` AS `orderline_id`,
         `b`.`bottom_id` AS `bottom_id`,
@@ -313,10 +314,11 @@ VIEW `order_view_with_total` AS
         `t`.`price` AS `t_price`,
         ((`t`.`price` + `b`.`price`) * `ol`.`amount`) AS `total`
     FROM
-        (((`order` `o`
+        ((((`order` `o`
         JOIN `orderline` `ol` ON ((`o`.`order_id` = `ol`.`order_id`)))
         JOIN `topping` `t` ON ((`ol`.`topping_id` = `t`.`topping_id`)))
         JOIN `bottom` `b` ON ((`ol`.`bottom_id` = `b`.`bottom_id`)))
+        JOIN `customer` `c` ON ((`o`.`customer_id` = `c`.`customer_id`)))
 ;
 
 CREATE 

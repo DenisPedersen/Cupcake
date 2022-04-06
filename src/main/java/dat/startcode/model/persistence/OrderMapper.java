@@ -56,7 +56,7 @@ public class OrderMapper implements IOrderMapper{
 
     @Override
     public ArrayList<Order> getAllOrders() {
-        String sql = "SELECT * FROM `order`";
+        String sql = "Select * FROM `order`INNER JOIN customer USING(customer_id)";
 
         ArrayList<Order> orderArrayList = new ArrayList<>();
 
@@ -69,8 +69,9 @@ public class OrderMapper implements IOrderMapper{
                 {
                     int orderID = rs.getInt("order_id");
                     Timestamp timestamp = rs.getTimestamp("date");
+                    String customerName = rs.getString("name");
                     ArrayList<Orderline> orderlineArrayList = getAllOrderlines(orderID);
-                    Order newOrder = new Order(orderID, timestamp, orderlineArrayList);
+                    Order newOrder = new Order(orderID, customerName, timestamp, orderlineArrayList);
                     orderArrayList.add(newOrder);
 
                 }
@@ -83,7 +84,7 @@ public class OrderMapper implements IOrderMapper{
     }
 
     public ArrayList<Order> getOrdersWithSpecificCustomerID(int customerID) {
-        String sql = "SELECT * FROM `order` WHERE customer_id = ?";
+        String sql = "Select * FROM `order`INNER JOIN customer USING(customer_id) WHERE customer_id = ?";
 
         ArrayList<Order> orderArrayList = new ArrayList<>();
 
@@ -98,8 +99,9 @@ public class OrderMapper implements IOrderMapper{
                 {
                     int orderID = rs.getInt("order_id");
                     Timestamp timestamp = rs.getTimestamp("date");
+                    String customerName = rs.getString("name");
                     ArrayList<Orderline> orderlineArrayList = getAllOrderlines(orderID);
-                    Order newOrder = new Order(orderID, timestamp, orderlineArrayList);
+                    Order newOrder = new Order(orderID, customerName, timestamp, orderlineArrayList);
                     orderArrayList.add(newOrder);
 
                 }

@@ -20,8 +20,8 @@
             <table>
                 <thead>
                 <tr>
-                <th>Ordrenummer:</th>
-                    <td colspan="5">${item.order_id}</td>
+                <th colspan="3">Ordrenummer: ${item.order_id}</th>
+                    <th colspan="3">Kundenavn: ${item.customerName}</th>
                 </tr>
                 </thead>
                 <thead>
