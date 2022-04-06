@@ -1,19 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@page errorPage="error.jsp" isErrorPage="false" %>
 
-<t:pagetemplate>
-    <jsp:attribute name="header">
-             Error page
-    </jsp:attribute>
-
-    <jsp:attribute name="footer">
-            Error page
-    </jsp:attribute>
-
-    <jsp:body>
 
         <p>An error has occured. This is the best message we can come up
             with right now: </p>
@@ -38,6 +23,3 @@
 
         <p>Jump back to the <a href="index.jsp">Frontpage</a>,
             or try <a href="login.jsp">logging</a> in again.</p>
-
-    </jsp:body>
-</t:pagetemplate>
