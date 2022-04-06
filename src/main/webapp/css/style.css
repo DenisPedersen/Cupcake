@@ -4,23 +4,11 @@
     border-style: none;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-    width: auto\9; /*  her gør jeg ikonerne i bunden små.  */
-}
-
 table {
     border-collapse: collapse;
     border: 1px solid silver;
     padding:15px;
 }
-
-/*#footer-icon {
-    position: relative; !important;
-    float:right; !important;
-    color: #3e8e41;
-}*/
 
 th, td {
     border: 1px solid silver;
@@ -31,24 +19,9 @@ th, td {
 
 }
 
-.navbar {
-    background-color: lightskyblue;
-}
-
-header  {
-align-items: center
-
-}
-
 body {
 
-    background-color: #cde6ff;
-    background-image: url(../images/5.webp);
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size : cover;
-    opacity: 150;
+    background-color: hotpink;
 }
 
 .card
