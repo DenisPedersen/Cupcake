@@ -56,9 +56,10 @@
     <hr/>
     <div class="row mt-4">
         <div class="col">
-            Haslevej 8, 8800 Bornholm<br>
+            Haslevej 8, <br>
+            8800 Bornholm<br>
             +45 33 14 14 48<br>
-            2800 Lyngby
+
         </div>
         <div class="col">
             <jsp:invoke fragment="footer"/><br/>
