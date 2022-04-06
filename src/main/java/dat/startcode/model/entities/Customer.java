@@ -7,24 +7,29 @@ public class Customer
     private String email;
     private String password;
     private String role;
+    private int customerID;
 
-    public Customer(String email, String password, String role)
+    public Customer(String email, String password, String role, int customerID)
     {
         this.email = email;
         this.password = password;
         this.role = role;
+        this.customerID = customerID;
     }
 
 
-
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Customer{" +
-                "brugerNavn='" + email + '\'' +
-                ", kodeord='" + password + '\'' +
-                ", rolle='" + role + '\'' +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", customerID=" + customerID +
                 '}';
+    }
+
+    public int getCustomerID() {
+        return customerID;
     }
 
     public String getEmail()
@@ -58,18 +63,15 @@ public class Customer
     }
 
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Customer)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return getEmail().equals(customer.getEmail()) && getPassword().equals(customer.getPassword()) &&
-                getRole().equals(customer.getRole());
+        return customerID == customer.customerID && email.equals(customer.email) && password.equals(customer.password) && role.equals(customer.role);
     }
 
     @Override
-    public int hashCode()
-    {
-        return Objects.hash(getEmail(), getPassword(), getRole());
+    public int hashCode() {
+        return Objects.hash(email, password, role, customerID);
     }
 }

@@ -31,6 +31,8 @@ public class OrderHistory extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
+        OrderMapper ordermapper = new OrderMapper(connectionPool);
+        ArrayList<Order> orderArrayList = new ArrayList<>();
 
         Customer customer = (Customer) session.getAttribute("customer");
                 if (customer == null) {
@@ -40,15 +42,19 @@ public class OrderHistory extends HttpServlet {
         request.getRequestDispatcher("error.jsp").forward(request, response);
                 }
 
-        OrderMapper ordermapper = new OrderMapper(connectionPool);
-        ArrayList<Orderline> orderlineArrayList = ordermapper.getAllOrderlines(1);
+                if(customer.getRole().equals("admin"))
+                {
+                   orderArrayList = ordermapper.getAllOrders();
+                   request.setAttribute("orderArrayList", orderArrayList);
+                   request.getRequestDispatcher("WEB-INF/orderOverview.jsp").forward(request,response);
+                }
 
-        System.out.println(orderlineArrayList);
-
-        ArrayList<Order> orderArrayList = ordermapper.getAllOrders();
-
-        request.setAttribute("orderArrayList", orderArrayList);
-        request.getRequestDispatcher("WEB-INF/orderOverview.jsp").forward(request,response);
+                else
+                {
+                    orderArrayList = ordermapper.getOrdersWithSpecificCustomerID(customer.getCustomerID());
+                    request.setAttribute("orderArrayList", orderArrayList);
+                    request.getRequestDispatcher("WEB-INF/orderOverview.jsp").forward(request,response);
+                }
 
 
     }

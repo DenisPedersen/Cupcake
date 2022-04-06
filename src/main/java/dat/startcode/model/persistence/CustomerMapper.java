@@ -36,7 +36,8 @@ public class CustomerMapper implements ICustomerMapper
                 if (rs.next())
                 {
                     String role = rs.getString("role_name");
-                    customer = new Customer(email, password, role);
+                    int customerID = rs.getInt("customer_id");
+                    customer = new Customer(email, password, role, customerID);
                 } else
                 {
                     throw new DatabaseException("Wrong username or password");
@@ -51,7 +52,7 @@ public class CustomerMapper implements ICustomerMapper
     }
 
     @Override
-    public Customer createUser(String username, String password, String role) throws DatabaseException
+    public Customer createCustomer(String email, String password, String role) throws DatabaseException
     {
         Logger.getLogger("web").log(Level.INFO, "");
         Customer customer;
@@ -60,16 +61,17 @@ public class CustomerMapper implements ICustomerMapper
         {
             try (PreparedStatement ps = connection.prepareStatement(sql))
             {
-                ps.setString(1, username);
+                ps.setString(1, email);
                 ps.setString(2, password);
                 ps.setString(3, role);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected == 1)
                 {
-                    customer = new Customer(username, password, role);
+                    int customerID = getCustomerID(email, password);
+                    customer = new Customer(email, password, role, customerID);
                 } else
                 {
-                    throw new DatabaseException("The user with username = " + username + " could not be inserted into the database");
+                    throw new DatabaseException("The user with username = " + email + " could not be inserted into the database");
                 }
             }
         }
@@ -80,5 +82,35 @@ public class CustomerMapper implements ICustomerMapper
         return customer;
     }
 
+    public int getCustomerID(String email, String password) throws DatabaseException
+    {
+        Logger.getLogger("web").log(Level.INFO, "");
+        Customer customer;
+        String sql = "SELECT * FROM customer_view WHERE email = ? AND password = ?";
+        int customerID = 0;
+
+        try (Connection connection = connectionPool.getConnection())
+        {
+            try (PreparedStatement ps = connection.prepareStatement(sql))
+            {
+                ps.setString(1, email);
+                ps.setString(2, password);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next())
+                {
+                    customerID = rs.getInt("customer_id");
+                }
+                if(customerID == 0)
+                {
+                    throw new DatabaseException("Kunne ikke finde customer_id");
+                }
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new DatabaseException(ex, "Could not insert username into database");
+        }
+        return customerID;
+    }
 
 }
