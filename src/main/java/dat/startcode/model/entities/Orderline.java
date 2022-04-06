@@ -26,6 +26,15 @@ public class Orderline {
                 '}';
     }
 
+    public Orderline(int amount, String t_name, String b_name, int b_price, int t_price, int total) {
+        this.amount = amount;
+        this.t_name = t_name;
+        this.b_name = b_name;
+        this.b_price = b_price;
+        this.t_price = t_price;
+        this.total = total;
+    }
+
     public Orderline(int orderline_id, int order_id, int amount, String t_name, String b_name, int b_price, int t_price, int total) {
         this.orderline_id = orderline_id;
         this.order_id = order_id;

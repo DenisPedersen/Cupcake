@@ -1,26 +1,24 @@
 package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
+import dat.startcode.model.entities.CupcakeOrder;
 import dat.startcode.model.entities.Order;
 import dat.startcode.model.entities.Orderline;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.ConnectionPool;
-import dat.startcode.model.persistence.OrderMapper;
-import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
+
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 @WebServlet(name = "AddToCart", value = "/AddToCart")
 public class AddToCart extends HttpServlet {
 
     private ConnectionPool connectionPool;
-    private OrderMapper orderMapper;
+
 
     @Override
     public void init() throws ServletException
@@ -39,35 +37,22 @@ public class AddToCart extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
+
+
+        int bottom_id = Integer.parseInt(request.getParameter("bottom_id"));
+        int topping_id = Integer.parseInt(request.getParameter("topping_id"));
+        int amount = Integer.parseInt(request.getParameter("amount"));
+
+        CupcakeOrder cupcakeOrder = new CupcakeOrder(amount,bottom_id,topping_id);
+
         HttpSession session = request.getSession();
 
-        int orderline_id;
-        int order_id;
-        int amount;
-        String t_name;
-        String b_name;
-        int b_price;
-        int t_price;
-        int total;
-        OrderMapper orderMapper = new OrderMapper(connectionPool);
-        ArrayList<Orderline> orderlineArrayList;
-        Orderline orderline = null;
+
+        request.setAttribute("cupcakeOrder", cupcakeOrder);
+        request.getRequestDispatcher("WEB-INF/cart.jsp").forward(request,response);
 
 
- /*       try
-        {
 
-
-            session = request.getSession();
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
-        catch (DatabaseException e)
-        {
-            Logger.getLogger("web").log(Level.SEVERE, e.getMessage());
-            request.setAttribute("errormessage", e.getMessage());
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-        }
-*/
 
     }
 }

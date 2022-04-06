@@ -63,7 +63,20 @@
             </div>
 
 
+<form action="AddToCart" method="post">
 
+    <label for="bottom_id">bottom id</label>
+    <input type="number" id="bottom_id" name="bottom_id">
+    <label for="topping_id">Topping id</label>
+    <input type="number" id="topping_id" name="topping_id">
+    <label for="amount">Amount</label>
+    <input type="number" id="amount" name="amount">
+
+
+
+    <button type="submit"> Vælg tal</button>
+
+</form>
 
 
     </jsp:body>
