@@ -21,16 +21,16 @@
                 <thead>
                 <tr>
                 <th>Ordrenummer:</th>
-                    <td colspan="all">${item.order_id}</td>
+                    <td colspan="5">${item.order_id}</td>
                 </tr>
-                </thead>>
+                </thead>
                 <thead>
                 <tr>
-                    <th>Bund:</th>
-                    <th>Bundpris:</th>
-                    <th>Topping:</th>
-                    <th>Toppingpris:</th>
                     <th>Antal:</th>
+                    <th>Bund:</th>
+                    <th>Topping:</th>
+                    <th>Bundpris:</th>
+                    <th>Toppingpris:</th>
                     <th>Total:</th>
                 </tr>
 
@@ -40,11 +40,11 @@
                     <c:forEach items="${item.orderlineArrayList}" var="line">
                 <tr>
 
-                        <td> ${line.b_name}</td>
-                        <td> ${line.b_price}kr.</td>
-                        <td> ${line.t_name}</td>
-                        <td> ${line.t_price}kr.</td>
                         <td> ${line.amount}</td>
+                        <td> ${line.b_name}</td>
+                        <td> ${line.t_name}</td>
+                        <td> ${line.b_price}kr.</td>
+                        <td> ${line.t_price}kr.</td>
                         <td> ${line.total}kr.</td>
                 </tr>
                     </c:forEach>
