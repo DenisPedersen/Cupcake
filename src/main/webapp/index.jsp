@@ -15,6 +15,8 @@
     <jsp:body>
 
 
+        <h3> ${requestScope.msg}</h3>
+
         <form action="AddToCart" method="post">
             <label for="bottomID">Vælg din bund:</label>
             <select name="bottomID" id="bottomID">
@@ -25,6 +27,7 @@
 
             </select>
             <br><br>
+
 
 
 
@@ -42,14 +45,13 @@
             <label for="amount">Vælg antal af den valgte cupcake (0-100):</label>
 
             <input type="number" id="amount" name="amount"
-                   min="0" max="100">
+                   min="0" max="100" required>
 
             <input type="submit" value="Læg i kurv">
 
         </form>
 
 
-        ${requestScope.msg}
 
 <%--
 

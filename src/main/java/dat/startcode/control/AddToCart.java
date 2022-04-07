@@ -80,7 +80,7 @@ public class AddToCart extends HttpServlet {
 
         cupcakeOrderArrayList.add(cupcakeOrder);
 
-        String msg = cupcakeOrder + " blev tilføjet din kurv";
+        String msg ="Dine cupcakes er nu lagt i kurven!";
 
         session.setAttribute("cupcakeOrderArrayList", cupcakeOrderArrayList);
 
