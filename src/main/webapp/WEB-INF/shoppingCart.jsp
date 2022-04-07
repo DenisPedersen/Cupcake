@@ -20,8 +20,9 @@
 
 
 
-        <c:forEach items="${requestScope.cupcakeOrderArrayList}" var="item">
+        <c:forEach items="${sessionScope.cupcakeOrderArrayList}" var="item">
             ${item}
+            <br>
         </c:forEach>
 
 

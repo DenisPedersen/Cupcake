@@ -33,7 +33,7 @@
             <select name="toppingID" id="toppingID">
                 <c:forEach items="${applicationScope.toppingArrayList}" var="item">
 
-                    <option value="${item.topping_id}">${item.name}</option>
+                    <option value="${item.toppingID}">${item.name}</option>
                 </c:forEach>
 
             </select>

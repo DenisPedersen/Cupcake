@@ -3,9 +3,9 @@ package dat.startcode.model.entities;
 public class CupcakeOrder {
 
     int amount;
-
     Bottom bottom;
     Topping topping;
+    int total;
 
 
     public Bottom getBottom() {
@@ -28,6 +28,7 @@ public class CupcakeOrder {
         this.amount = amount;
         this.bottom = bottom;
         this.topping = topping;
+        total = (bottom.getPrice() + topping.getPrice()) * amount;
 
     }
     public int getAmount() {

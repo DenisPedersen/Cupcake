@@ -4,7 +4,6 @@ import dat.startcode.model.config.ApplicationStart;
 
 import dat.startcode.model.entities.Bottom;
 import dat.startcode.model.entities.CupcakeOrder;
-import dat.startcode.model.entities.Orderline;
 import dat.startcode.model.entities.Topping;
 import dat.startcode.model.persistence.ConnectionPool;
 import dat.startcode.model.persistence.OrderMapper;
@@ -13,7 +12,6 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 
 @WebServlet(name = "AddToCart", value = "/AddToCart")
 public class AddToCart extends HttpServlet {
@@ -69,7 +67,7 @@ public class AddToCart extends HttpServlet {
 
 
         for (Topping t  : toppingArrayList) {
-            if(t.getTopping_id() == topping_id) {
+            if(t.getToppingID() == topping_id) {
                 topping =t;
             }
 
@@ -84,8 +82,9 @@ public class AddToCart extends HttpServlet {
 
         String msg = cupcakeOrder + " blev tilføjet din kurv";
 
+        session.setAttribute("cupcakeOrderArrayList", cupcakeOrderArrayList);
+
         request.setAttribute("msg", msg);
-        request.setAttribute("cupcakeOrderArrayList", cupcakeOrderArrayList);
         request.getRequestDispatcher("index.jsp").forward(request,response);
 
 
