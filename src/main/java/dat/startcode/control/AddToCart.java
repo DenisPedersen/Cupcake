@@ -39,7 +39,6 @@ public class AddToCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
         HttpSession session = request.getSession();
 
         ArrayList<CupcakeOrder> cupcakeOrderArrayList = (ArrayList<CupcakeOrder>) session.getAttribute("cupcakeOrderArrayList");
@@ -88,7 +87,6 @@ public class AddToCart extends HttpServlet {
         request.setAttribute("msg", msg);
         request.setAttribute("cupcakeOrderArrayList", cupcakeOrderArrayList);
         request.getRequestDispatcher("index.jsp").forward(request,response);
-
 
 
     }
