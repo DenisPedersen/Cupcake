@@ -9,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.Map;
 
 @WebServlet(name = "AddToCart", value = "/AddToCart")
 public class AddToCart extends HttpServlet {
@@ -32,11 +33,17 @@ public class AddToCart extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        for (Map.Entry<String, String[]> stringEntry : request.getParameterMap().entrySet()) {
+            if (stringEntry.getKey().startsWith("toppingID")) {
+                stringEntry.getValue();
+            }
+        }
+             System.out.println("bottom er " + request.getParameter("bottomID"));
+        System.out.println("topping er " + request.getParameter("toppingID"));
 
 
-
-        int bottom_id = Integer.parseInt(request.getParameter("bottom_id"));
-        int topping_id = Integer.parseInt(request.getParameter("topping_id"));
+        int bottom_id = Integer.parseInt(request.getParameter("bottomID"));
+        int topping_id = Integer.parseInt(request.getParameter("toppingID"));
         int amount = Integer.parseInt(request.getParameter("amount"));
 
         CupcakeOrder cupcakeOrder = new CupcakeOrder(amount,bottom_id,topping_id);
