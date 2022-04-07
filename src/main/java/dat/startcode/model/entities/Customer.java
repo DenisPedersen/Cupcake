@@ -8,13 +8,15 @@ public class Customer
     private String password;
     private String role;
     private int customerID;
+    private int balance;
 
-    public Customer(String email, String password, String role, int customerID)
+    public Customer(String email, String password, String role, int customerID, int balance)
     {
         this.email = email;
         this.password = password;
         this.role = role;
         this.customerID = customerID;
+        this.balance = balance;
     }
 
 

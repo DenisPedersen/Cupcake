@@ -37,7 +37,8 @@ public class CustomerMapper implements ICustomerMapper
                 {
                     String role = rs.getString("role_name");
                     int customerID = rs.getInt("customer_id");
-                    customer = new Customer(email, password, role, customerID);
+                    int balance = rs.getInt("balance");
+                    customer = new Customer(email, password, role, customerID, balance);
                 } else
                 {
                     throw new DatabaseException("Wrong username or password");
@@ -52,11 +53,11 @@ public class CustomerMapper implements ICustomerMapper
     }
 
     @Override
-    public Customer createCustomer(String email, String password, String role) throws DatabaseException
+    public Customer createCustomer(String email, String password, String role, int balance) throws DatabaseException
     {
         Logger.getLogger("web").log(Level.INFO, "");
         Customer customer;
-        String sql = "insert into user (username, password, role) values (?,?,?)";
+        String sql = "insert into user (username, password, role, balance) values (?,?,?, ?)";
         try (Connection connection = connectionPool.getConnection())
         {
             try (PreparedStatement ps = connection.prepareStatement(sql))
@@ -64,11 +65,12 @@ public class CustomerMapper implements ICustomerMapper
                 ps.setString(1, email);
                 ps.setString(2, password);
                 ps.setString(3, role);
+                ps.setInt(4, balance);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected == 1)
                 {
                     int customerID = getCustomerID(email, password);
-                    customer = new Customer(email, password, role, customerID);
+                    customer = new Customer(email, password, role, customerID, balance);
                 } else
                 {
                     throw new DatabaseException("The user with username = " + email + " could not be inserted into the database");

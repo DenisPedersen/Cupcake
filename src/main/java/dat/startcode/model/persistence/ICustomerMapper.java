@@ -6,5 +6,5 @@ import dat.startcode.model.exceptions.DatabaseException;
 public interface ICustomerMapper
 {
     public Customer login(String email, String kodeord) throws DatabaseException;
-    public Customer createCustomer(String username, String password, String role) throws DatabaseException;
+    public Customer createCustomer(String username, String password, String role, int balance) throws DatabaseException;
 }

@@ -60,7 +60,7 @@ class CustomerMapperTest
     @Test
     void login() throws DatabaseException
     {
-        Customer expectedCustomer = new Customer("user","1234","user", 1);
+        Customer expectedCustomer = new Customer("user","1234","user", 1, 0);
         Customer actualCustomer = userMapper.login("user","1234");
         assertEquals(expectedCustomer, actualCustomer);
     }
@@ -80,9 +80,9 @@ class CustomerMapperTest
     @Test
     void createUser() throws DatabaseException
     {
-        Customer newCustomer = userMapper.createCustomer("jill", "1234", "user");
+        Customer newCustomer = userMapper.createCustomer("jill", "1234", "user", 0);
         Customer logInCustomer = userMapper.login("jill","1234");
-        Customer expectedCustomer = new Customer("jill", "1234", "user", 2);
+        Customer expectedCustomer = new Customer("jill", "1234", "user", 2, 0);
         assertEquals(expectedCustomer, newCustomer);
         assertEquals(expectedCustomer, logInCustomer);
 
