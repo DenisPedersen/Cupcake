@@ -4,6 +4,8 @@
     border-style: none;
 }
 
+
+
 table {
     border-collapse: collapse;
     border: 1px solid silver;
@@ -24,6 +26,10 @@ body {
     background-image: url(/images/5.webp); !important;
     background-repeat: no-repeat; !important;
 
+}
+
+.table-striped{
+    text-align: center;
 }
 
 .card
