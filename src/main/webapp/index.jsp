@@ -15,14 +15,27 @@
     <jsp:body>
 
 
-        <c:forEach items="${applicationScope.bottomArrayList}" var="item" >
+
+        <label for="bottom-names">Vælg bund:</label>
+        <select name="bottom-names" id="bottom-names"></select>
+        <c:forEach items="${applicationScope.bottomArrayList}" var="item">
+            <option value="${item.bottomID}">
+        </c:forEach>
+            Bund</option>
+
+<%--
+
+
+            <c:set var="index" value="-1"> </c:set>
+        <c:forEach items="${applicationScope.bottomArrayList}" var="item" varStatus="loop" >
+
 
         <div class="card">
             <div class="card-body">
 
                 <h5 class="card-title">${item.name}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">${item.price} kr</h6>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                <button type="button" onclick="chosenItem = ${item.bottomID}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
                     Vælg!</button>
             </div>
         </div>
@@ -31,6 +44,7 @@
 
 
             <!-- Modal -->
+
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -41,28 +55,41 @@
                             </button>
                         </div>
                         <div class="modal-body">
+                            <form action="AddToCart" method="post">
 
-                            <c:forEach items="${applicationScope.toppingArrayList}" var="item" >
+                            <c:forEach items="${applicationScope.toppingArrayList}" var="topping" >
 
                             <div class="button">
+
                                 <button type="submit" class="btn btn-primary" id="payment">${item.name} </button>
 
+                                <input type="button" class="btn btn-primary" value="${topping.name} ${topping.topping_id}" />
+                                <input type="hidden" name="toppingID" value="${topping.topping_id}">
+                                <input type="hidden" name="bottomID">
+                                <script>
+                                    document.getElementById("bottomID").value = chosenItem
+                                </script>
+
                             </div>
-                            </c:forEach>
 
-                            </form>
 
+
+
+
+                                </c:forEach>
 
                         </div>
                         <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Læg i kurv</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Luk</button>
-
                         </div>
                     </div>
                 </div>
             </div>
 
-        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/AddToCart">Tilføj til kurv</a>
+
+        </form>
+--%>
 
 
     </jsp:body>
