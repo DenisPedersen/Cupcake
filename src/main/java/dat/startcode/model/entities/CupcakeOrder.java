@@ -8,6 +8,18 @@ public class CupcakeOrder {
     int total;
 
 
+    public CupcakeOrder(int amount, Bottom bottom, Topping topping) {
+        this.amount = amount;
+        this.bottom = bottom;
+        this.topping = topping;
+        total = (bottom.getPrice() + topping.getPrice()) * amount;
+
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
     public Bottom getBottom() {
         return bottom;
     }
@@ -22,14 +34,6 @@ public class CupcakeOrder {
 
     public void setTopping(Topping topping) {
         this.topping = topping;
-    }
-
-    public CupcakeOrder(int amount, Bottom bottom, Topping topping) {
-        this.amount = amount;
-        this.bottom = bottom;
-        this.topping = topping;
-        total = (bottom.getPrice() + topping.getPrice()) * amount;
-
     }
     public int getAmount() {
         return amount;
