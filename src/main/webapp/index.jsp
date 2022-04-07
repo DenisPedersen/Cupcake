@@ -20,7 +20,7 @@
             <select name="bottomID" id="bottomID">
                 <c:forEach items="${applicationScope.bottomArrayList}" var="item">
 
-                <option value="${item.bottomID}">${item.name}</option>
+                <option value="${item.bottomID}">${item.name} (${item.price}kr.)</option>
                 </c:forEach>
 
             </select>
@@ -33,7 +33,7 @@
             <select name="toppingID" id="toppingID">
                 <c:forEach items="${applicationScope.toppingArrayList}" var="item">
 
-                    <option value="${item.toppingID}">${item.name}</option>
+                    <option value="${item.toppingID}">${item.name} (${item.price}kr.)</option>
                 </c:forEach>
 
             </select>

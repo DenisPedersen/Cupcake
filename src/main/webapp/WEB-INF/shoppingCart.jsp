@@ -38,8 +38,8 @@
             <tr>
                 <th scope="row">${index = index +1}</th>
                 <td>${item.amount}</td>
-                <td>${item.bottom.name}</td>
-                <td>${item.topping.name}</td>
+                <td>${item.bottom.name} (${item.bottom.price}kr.)</td>
+                <td>${item.topping.name} (${item.topping.price}kr.)</td>
                 <td ${fullAmount = fullAmount + item.total}>${item.total}kr.</td>
             </tr>
 
