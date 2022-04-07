@@ -34,10 +34,11 @@
             <tbody>
         <c:set var="index" value="0"></c:set>
         <c:set var="fullAmount" value="0"></c:set>
+        <c:set var="fullCupcakeAmount" value="0"></c:set>
         <c:forEach items="${sessionScope.cupcakeOrderArrayList}" var="item" varStatus="loop">
             <tr>
                 <th scope="row">${index = index +1}</th>
-                <td>${item.amount}</td>
+                <td ${fullCupcakeAmount = fullCupcakeAmount + item.amount} >${item.amount}</td>
                 <td>${item.bottom.name} (${item.bottom.price}kr.)</td>
                 <td>${item.topping.name} (${item.topping.price}kr.)</td>
                 <td ${fullAmount = fullAmount + item.total}>${item.total}kr.</td>
@@ -47,7 +48,9 @@
             </tbody>
             <tfoot>
             <tr>
-            <th colspan="4" scope="row">Samlet Pris</th><th>${fullAmount}kr.</th>
+                <th></th>
+                <th>${fullCupcakeAmount}</th>
+            <th colspan="2" scope="row">Samlet Pris</th><th>${fullAmount}kr.</th>
             </tr>
             </tfoot>
         </table>
