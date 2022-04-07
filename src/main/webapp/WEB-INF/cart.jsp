@@ -6,6 +6,10 @@
 <t:pagetemplate>
     <jsp:attribute name="header">
         Her er så kurven
+
+
+
+
     </jsp:attribute>
 
     <jsp:attribute name="footer">
@@ -14,19 +18,14 @@
 
     <jsp:body>
 
-            ${requestScope.cupcakeOrder}
 
-        <c:forEach items="${applicationScope.orderlineArrayList}" var="item" >
 
-            <%--Her forestiller jeg mig at vi skal køre et array med orderlines som så
-            vises for den gældende ordre ... --%>
-
+        <c:forEach items="${requestScope.cupcakeOrderArrayList}" var="item">
+            ${item}
         </c:forEach>
 
 
 
 
-
     </jsp:body>
-
 </t:pagetemplate>
