@@ -33,16 +33,23 @@
             </thead>
             <tbody>
         <c:set var="index" value="0"></c:set>
+        <c:set var="fullAmount" value="0"></c:set>
         <c:forEach items="${sessionScope.cupcakeOrderArrayList}" var="item" varStatus="loop">
             <tr>
                 <th scope="row">${index = index +1}</th>
                 <td>${item.amount}</td>
                 <td>${item.bottom.name}</td>
                 <td>${item.topping.name}</td>
-                <td>${item.total}kr.</td>
+                <td ${fullAmount = fullAmount + item.total}>${item.total}kr.</td>
             </tr>
-            </tbody>
+
         </c:forEach>
+            </tbody>
+            <tfoot>
+            <tr>
+            <th colspan="4" scope="row">Samlet Pris</th><th>${fullAmount}kr.</th>
+            </tr>
+            </tfoot>
         </table>
 
       <%--  <c:forEach items="${sessionScope.cupcakeOrderArrayList}" var="item">
