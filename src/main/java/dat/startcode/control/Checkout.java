@@ -10,7 +10,7 @@ public class Checkout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.getRequestDispatcher("WEB-INF/cart.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/Cart.jsp").forward(request, response);
 
     }
 
