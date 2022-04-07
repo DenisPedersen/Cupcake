@@ -3,15 +3,31 @@ package dat.startcode.model.entities;
 public class CupcakeOrder {
 
     int amount;
-    int bottom_id;
-    int topping_id;
+
+    Bottom bottom;
+    Topping topping;
 
 
+    public Bottom getBottom() {
+        return bottom;
+    }
 
-    public CupcakeOrder(int amount, int bottom_id, int topping_id) {
+    public void setBottom(Bottom bottom) {
+        this.bottom = bottom;
+    }
+
+    public Topping getTopping() {
+        return topping;
+    }
+
+    public void setTopping(Topping topping) {
+        this.topping = topping;
+    }
+
+    public CupcakeOrder(int amount, Bottom bottom, Topping topping) {
         this.amount = amount;
-        this.bottom_id = bottom_id;
-        this.topping_id = topping_id;
+        this.bottom = bottom;
+        this.topping = topping;
 
     }
     public int getAmount() {
@@ -22,28 +38,12 @@ public class CupcakeOrder {
         this.amount = amount;
     }
 
-    public int getBottom_id() {
-        return bottom_id;
-    }
-
-    public void setBottom_id(int bottom_id) {
-        this.bottom_id = bottom_id;
-    }
-
-    public int getTopping_id() {
-        return topping_id;
-    }
-
-    public void setTopping_id(int topping_id) {
-        this.topping_id = topping_id;
-    }
-
     @Override
     public String toString() {
         return "CupcakeOrder{" +
                 "amount=" + amount +
-                ", bottom_id=" + bottom_id +
-                ", topping_id=" + topping_id +
+                ", bottom=" + bottom +
+                ", topping=" + topping +
                 '}';
     }
 }

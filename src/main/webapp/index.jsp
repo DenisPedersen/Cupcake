@@ -15,13 +15,41 @@
     <jsp:body>
 
 
+        <form action="AddToCart" method="post">
+            <label for="bottomID">Vælg din bund:</label>
+            <select name="bottomID" id="bottomID">
+                <c:forEach items="${applicationScope.bottomArrayList}" var="item">
 
-        <label for="bottom-names">Vælg bund:</label>
-        <select name="bottom-names" id="bottom-names"></select>
-        <c:forEach items="${applicationScope.bottomArrayList}" var="item">
-            <option value="${item.bottomID}">
-        </c:forEach>
-            Bund</option>
+                <option value="${item.bottomID}">${item.name}</option>
+                </c:forEach>
+
+            </select>
+            <br><br>
+
+
+
+
+            <label for="toppingID">Vælg din topping:</label>
+            <select name="toppingID" id="toppingID">
+                <c:forEach items="${applicationScope.toppingArrayList}" var="item">
+
+                    <option value="${item.topping_id}">${item.name}</option>
+                </c:forEach>
+
+            </select>
+            <br><br>
+
+            <label for="amount">Vælg antal af den valgte cupcake (0-100):</label>
+
+            <input type="number" id="amount" name="amount"
+                   min="0" max="100">
+
+            <input type="submit" value="Læg i kurv">
+
+        </form>
+
+
+        ${requestScope.msg}
 
 <%--
 

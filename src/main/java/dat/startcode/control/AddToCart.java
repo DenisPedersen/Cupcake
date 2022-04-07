@@ -2,14 +2,17 @@ package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
 
+import dat.startcode.model.entities.Bottom;
 import dat.startcode.model.entities.CupcakeOrder;
 import dat.startcode.model.entities.Orderline;
+import dat.startcode.model.entities.Topping;
 import dat.startcode.model.persistence.ConnectionPool;
 import dat.startcode.model.persistence.OrderMapper;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 @WebServlet(name = "AddToCart", value = "/AddToCart")
@@ -29,36 +32,62 @@ public class AddToCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-        int bottom_id = 2;
-        int topping_id = 3;
-        int amount = 8;
-
 
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        for (Map.Entry<String, String[]> stringEntry : request.getParameterMap().entrySet()) {
-            if (stringEntry.getKey().startsWith("toppingID")) {
-                stringEntry.getValue();
-            }
-        }
-             System.out.println("bottom er " + request.getParameter("bottomID"));
-        System.out.println("topping er " + request.getParameter("toppingID"));
 
+
+        HttpSession session = request.getSession();
+
+        ArrayList<CupcakeOrder> cupcakeOrderArrayList = (ArrayList<CupcakeOrder>) session.getAttribute("cupcakeOrderArrayList");
+
+        ArrayList<Bottom> bottomArrayList = (ArrayList<Bottom>) getServletContext().getAttribute("bottomArrayList");
+        ArrayList<Topping> toppingArrayList = (ArrayList<Topping>) getServletContext().getAttribute("toppingArrayList");
+
+
+
+        if(cupcakeOrderArrayList == null) {
+            cupcakeOrderArrayList = new ArrayList<>();
+        }
 
         int bottom_id = Integer.parseInt(request.getParameter("bottomID"));
         int topping_id = Integer.parseInt(request.getParameter("toppingID"));
         int amount = Integer.parseInt(request.getParameter("amount"));
 
 
-        CupcakeOrder cupcakeOrder = new CupcakeOrder(amount,bottom_id,topping_id);
+        Bottom bottom = null;
+        Topping topping = null;
 
-        HttpSession session = request.getSession();
+        for (Bottom b  : bottomArrayList) {
+            if(b.getBottomID() == bottom_id) {
+                bottom =b;
+            }
 
-        request.setAttribute("cupcakeOrder", cupcakeOrder);
-        request.getRequestDispatcher("WEB-INF/cart.jsp").forward(request,response);
+        }
+
+
+        for (Topping t  : toppingArrayList) {
+            if(t.getTopping_id() == topping_id) {
+                topping =t;
+            }
+
+        }
+
+
+
+        CupcakeOrder cupcakeOrder = new CupcakeOrder(amount,bottom,topping);
+
+
+        cupcakeOrderArrayList.add(cupcakeOrder);
+
+        String msg = cupcakeOrder + " blev tilføjet din kurv";
+
+        request.setAttribute("msg", msg);
+        request.setAttribute("cupcakeOrderArrayList", cupcakeOrderArrayList);
+        request.getRequestDispatcher("index.jsp").forward(request,response);
 
 
 
