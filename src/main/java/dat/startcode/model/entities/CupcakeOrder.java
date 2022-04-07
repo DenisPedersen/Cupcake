@@ -45,6 +45,7 @@ public class CupcakeOrder {
                 "amount=" + amount +
                 ", bottom=" + bottom +
                 ", topping=" + topping +
+                ", total=" + total +
                 '}';
     }
 }
