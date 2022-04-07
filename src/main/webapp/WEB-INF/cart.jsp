@@ -14,7 +14,7 @@
 
     <jsp:body>
 
-
+            ${requestScope.cupcakeOrder}
 
         <c:forEach items="${applicationScope.orderlineArrayList}" var="item" >
 

@@ -20,12 +20,15 @@ th, td {
 }
 
 body {
+    background-color: hotpink; !important;
+    background-image: url(/images/5.webp); !important;
+    background-repeat: no-repeat; !important;
 
-    background-color: hotpink;
 }
 
 .card
 {
+    background-image: url(/images/1.jpg);
     font-size: larger; !important;
     width: 18rem; !important;
     float: left; !important;
@@ -34,7 +37,7 @@ body {
 }
 
 .card-body {
-
+    background-image: url(/images/1.jpg); !important;
 }
 
 /* Dropdown Button */

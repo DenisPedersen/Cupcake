@@ -19,7 +19,6 @@ public class Customer
         this.balance = balance;
     }
 
-
     @Override
     public String toString() {
         return "Customer{" +
@@ -27,6 +26,7 @@ public class Customer
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
                 ", customerID=" + customerID +
+                ", balance=" + balance +
                 '}';
     }
 

@@ -3,6 +3,7 @@ package dat.startcode.control;
 import dat.startcode.model.config.ApplicationStart;
 
 import dat.startcode.model.entities.CupcakeOrder;
+import dat.startcode.model.entities.Orderline;
 import dat.startcode.model.persistence.ConnectionPool;
 import dat.startcode.model.persistence.OrderMapper;
 import javax.servlet.*;
@@ -26,6 +27,17 @@ public class AddToCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        int bottom_id = 2;
+        int topping_id = 3;
+        int amount = 8;
+
+        CupcakeOrder cupcakeOrder = new CupcakeOrder(amount,bottom_id,topping_id);
+
+        HttpSession session = request.getSession();
+
+        request.setAttribute("cupcakeOrder", cupcakeOrder);
+        request.getRequestDispatcher("WEB-INF/cart.jsp").forward(request,response);
+
 
 
     }
@@ -34,17 +46,6 @@ public class AddToCart extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-
-        int bottom_id = Integer.parseInt(request.getParameter("bottom_id"));
-        int topping_id = Integer.parseInt(request.getParameter("topping_id"));
-        int amount = Integer.parseInt(request.getParameter("amount"));
-
-        CupcakeOrder cupcakeOrder = new CupcakeOrder(amount,bottom_id,topping_id);
-
-        HttpSession session = request.getSession();
-
-        request.setAttribute("cupcakeOrder", cupcakeOrder);
-        request.getRequestDispatcher("WEB-INF/cart.jsp").forward(request,response);
 
 
     }
